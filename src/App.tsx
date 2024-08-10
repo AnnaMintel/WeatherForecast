@@ -9,8 +9,7 @@ function App() {
     const [weather, setWeather] = useState<{temp: number, description: string} | null>(null);
     
     const fetchWeather = () => {
-        const APIkey = 'd530e5a35f404c873f82bb29be51ae21';
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIkey}&units=metric`)
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}&units=metric`)
         .then(response => response.json())
         .then(json => {
             if(json.cod==='404'){
