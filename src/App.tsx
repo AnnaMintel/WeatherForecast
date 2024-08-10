@@ -37,12 +37,13 @@ function App() {
 
     return (
         <div className="App">
-        <h1>Weather App</h1>
-        <input type="text" value={city} onChange={(e) => setCity(e.currentTarget.value)} onKeyDown={enterPress}/>
-        <button onClick={fetchWeather}>Get weather</button>
-        {error &&<div style={{ color: 'red' }}>{error}</div>}
+        <h1 className="title">Weather Forecast</h1>
+        <div className="input-container">
+            <input type="text" value={city} onChange={(e) => setCity(e.currentTarget.value)} onKeyDown={enterPress} className="input-field" />
+            <button onClick={fetchWeather} className="submit-button">Get weather</button>
+        </div>
+        {error &&<div className="error-message">{error}</div>}
         {weather && <Weather temp={weather.temp} description={weather.description} /> }
-        <div></div>
     </div>
     );
 }

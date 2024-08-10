@@ -6,8 +6,8 @@ interface WeatherProps {
 const Weather = ({ temp, description }:WeatherProps) => {
     return (
         <div className="weather">
-            <p>Temperature: {temp} °C</p>
-            <p>Weather: {description}</p>
+            <p className="temperature">Temperature: {temp} °C</p>
+            <p className="description">Weather: {description}</p>
         </div>
     );
 };
