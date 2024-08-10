@@ -1,17 +1,15 @@
 import React, {useState} from 'react';
 import './App.css';
-import {log} from "util";
 import Weather from './Weather';
 
 function App() {
 
-    const [city, setCity] = useState<string>('')
-    const[error, setError] = useState<string|null>(null)
-    const [weather, setWeather] = useState<{temp: number, description: string} | null>(null)
-
+    const [city, setCity] = useState<string>('');
+    const[error, setError] = useState<string|null>(null);
+    const [weather, setWeather] = useState<{temp: number, description: string} | null>(null);
+    
     const fetchWeather = () => {
-        const APIkey = '1ce2c8f1225f14bf33b893989c1548cf'
-        //d530e5a35f404c873f82bb29be51ae21
+        const APIkey = 'd530e5a35f404c873f82bb29be51ae21';
         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIkey}&units=metric`)
         .then(response => response.json())
         .then(json => {
@@ -27,18 +25,20 @@ function App() {
             }
         })
         .catch(error => {
-            console.error('Ошибка:', error);
+            console.error('Error:', error);
             setError('An error occurred');
             setWeather(null);
-
          });
-
      }
+
+     const enterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        e.key === 'Enter' && fetchWeather();
+    }
 
     return (
         <div className="App">
         <h1>Weather App</h1>
-        <input type="text" value={city} onChange={(e) => setCity(e.currentTarget.value)}/>
+        <input type="text" value={city} onChange={(e) => setCity(e.currentTarget.value)} onKeyDown={enterPress}/>
         <button onClick={fetchWeather}>Get weather</button>
         {error &&<div style={{ color: 'red' }}>{error}</div>}
         {weather && <Weather temp={weather.temp} description={weather.description} /> }
